@@ -94,10 +94,13 @@ do
 		#mkdir ${ss_startpath}
 		echo -e ${ss_autostart} > ${ss_startpath}/shadowsocks-qt5.desktop
 		sudo chmod 666 ${ss_startpath}/shadowsocks-qt5.desktop
-
-		genpac --pac-proxy "SOCKS5 127.0.0.1:6666" --gfwlist-proxy="SOCKS5 127.0.0.1:6666" --output="autoproxy.pac" --gfwlist-url="https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt"
-		sudo gsettings set org.gnome.system.proxy mode auto
-		sudo gsettings set org.gnome.system.proxy autoconfig-url "file://${package_path}/autoproxy.pac"
+		if [[ (-e "${setting_path}/ss_config.ini") ]];
+		then
+			genpac --pac-proxy "SOCKS5 127.0.0.1:6666" --gfwlist-proxy="SOCKS5 127.0.0.1:6666" --output="autoproxy.pac" --gfwlist-url="https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt"
+			sudo gsettings set org.gnome.system.proxy mode auto
+			sudo gsettings set org.gnome.system.proxy autoconfig-url "file://${package_path}/autoproxy.pac"
+		fi
+		
 		echo "已打开SS并设为开机自启动.[Press any key to continue],可打开浏览器测试"
 		#read
 		;;
