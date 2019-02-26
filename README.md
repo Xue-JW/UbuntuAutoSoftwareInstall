@@ -12,15 +12,15 @@ sudo ./Install.sh
 
 输入管理员密码后启动脚本,目前带"#"的项目未添加
 
-首次安装需选择**10** ,更新软件源并与安装安装器,apt-fast安装过程中的设置依次选择：apt，16，Yes
+首次安装需选择**[10]** ,更新软件源并与安装安装器,apt-fast安装过程中的设置依次选择：apt，16，Yes
 
 软件源测速结果如图:
 
-![source_speedtest](/home/gavin/Downloads/auto_install/README/source_speedtest.png)
+![source_speedtest](./source_speedtest.png)
 
 可根据实际情况修改setting_file文件夹中source_list.txt选择需要添加的软件源
 
-为了更好的观看本文档,可安装脚本中[2]->[4]的Typora打开本文档.
+为了更好的观看本文档,可安装脚本中[2]->[4]的Typora软件打开本文档.
 
 除Shadowsocks-qt5及部分美化插件外,其他软件在开始菜单处打开
 
