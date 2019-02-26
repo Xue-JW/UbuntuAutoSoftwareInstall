@@ -21,9 +21,9 @@ vim_setting(){
 #LASTLINE=$(tail -1 /etc/vim/vimrc)
 #if [ "${LASTLINE}" !=  '"add vim setting end' ];then
 
-if [ `grep -c '"add vim setting end' /etc/vim/vimrc` -eq '0' ];then
+if [ `grep -c 'add vim setting end' /etc/vim/vimrc` -eq '0' ];then
 	echo "添加vim个性化设置到/etc/vim/vimrc"
-	FILE=${filepath}/vim_setting.txt
+	FILE=${setting_path}/vim_setting.txt
 	k=1
 	while read -r line;do	
 		sudo echo ${line} >> /etc/vim/vimrc
@@ -114,5 +114,6 @@ ${Green_font_prefix} 0.${Font_color_suffix} 退出工具安装
 		echo "请输入正确数字 [0-10]"
 		;;
 	esac
+	sudo chmod 777 ${package_path} -R
 	clear
 done

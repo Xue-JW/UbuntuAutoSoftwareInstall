@@ -79,5 +79,6 @@ ${Green_font_prefix} 0.${Font_color_suffix} 退出美化工具安装
 		echo "请输入正确数字 [0-10]"
 		;;
 	esac
+	sudo chmod 777 ${package_path} -R
 	clear
 done

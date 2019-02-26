@@ -14,11 +14,15 @@
 sh_ver="0.0.1"
 filepath=$(cd "$(dirname "$0")"; pwd)
 package_path=~/Downloads/Software_Package
-export filepath package_path
+setting_path=$(cd "$(dirname "$0")"; pwd)/setting_file
+
+
+export filepath package_path setting_path
 
 if [ ! -e ${package_path} ]
 then
 	mkdir ${package_path}
+	sudo chmod 777 ${package_path} -R
 fi
 
 #代理
@@ -43,53 +47,18 @@ check_root(){
 
 check_source(){
 	#LASTLINE=$(tail -1 /etc/apt/sources.list)
-	if [ `grep -c "# add tsinghua mirrors end" /etc/apt/sources.list` -eq '0' ];then
-	#if [ "${LASTLINE}" != "# add tsinghua mirrors end" ];then
-		sudo cp /etc/apt/sources.list /etc/apt/sources.list.old
+	if [ `grep -c '# add tsinghua mirrors end' /etc/apt/sources.list` -eq '0' ];then
 		echo "添加软件源:
 ------aliyun(28ms)***tsinghua(35ms)***163(30ms)***ustc(26ms-edu)------"
-		echo "
-# add aliyun mirrors
-deb http://mirrors.aliyun.com/ubuntu/ xenial main multiverse restricted universe
-deb http://mirrors.aliyun.com/ubuntu/ xenial-backports main multiverse restricted universe
-deb http://mirrors.aliyun.com/ubuntu/ xenial-proposed main multiverse restricted universe
-deb http://mirrors.aliyun.com/ubuntu/ xenial-security main multiverse restricted universe
-#deb http://mirrors.aliyun.com/ubuntu/ xenial-updates main multiverse restricted universe
-#deb-src http://mirrors.aliyun.com/ubuntu/ xenial main multiverse restricted universe
-#deb-src http://mirrors.aliyun.com/ubuntu/ xenial-backports main multiverse restricted universe
-#deb-src http://mirrors.aliyun.com/ubuntu/ xenial-proposed main multiverse restricted universe
-#deb-src http://mirrors.aliyun.com/ubuntu/ xenial-security main multiverse restricted universe
-#deb-src http://mirrors.aliyun.com/ubuntu/ xenial-updates main multiverse restricted universe
-# add aliyun mirrors end
+		sudo cp /etc/apt/sources.list /etc/apt/sources.list.old
+		FILE=${setting_path}/source_list.txt
+		k=1
+		while read -r line;do	
+			sudo echo ${line} >> /etc/apt/sources.list
+			((k++))
+		done < ${FILE} 
+	
 
-# add 163 mirrors
-deb http://mirrors.163.com/ubuntu/ xenial main restricted universe multiverse
-deb http://mirrors.163.com/ubuntu/ xenial-security main restricted universe multiverse
-deb http://mirrors.163.com/ubuntu/ xenial-updates main restricted universe multiverse
-deb http://mirrors.163.com/ubuntu/ xenial-proposed main restricted universe multiverse
-deb http://mirrors.163.com/ubuntu/ xenial-backports main restricted universe multiverse
-# add 163 mirrors end
-
-# add ustc mirrors
-deb http://mirrors.ustc.edu.cn/ubuntu/ xenial main restricted universe multiverse
-deb http://mirrors.ustc.edu.cn/ubuntu/ xenial-security main restricted universe multiverse
-deb http://mirrors.ustc.edu.cn/ubuntu/ xenial-updates main restricted universe multiverse
-deb http://mirrors.ustc.edu.cn/ubuntu/ xenial-proposed main restricted universe multiverse
-deb http://mirrors.ustc.edu.cn/ubuntu/ xenial-backports main restricted universe multiverse
-#deb-src http://mirrors.ustc.edu.cn/ubuntu/ xenial main restricted universe multiverse
-#deb-src http://mirrors.ustc.edu.cn/ubuntu/ xenial-security main restricted universe multiverse
-#deb-src http://mirrors.ustc.edu.cn/ubuntu/ xenial-updates main restricted universe multiverse
-#deb-src http://mirrors.ustc.edu.cn/ubuntu/ xenial-proposed main restricted universe multiverse
-#deb-src http://mirrors.ustc.edu.cn/ubuntu/ xenial-backports main restricted universe multiverse
-# add ustc mirrors end
-
-# add tsinghua mirrors
-deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial main restricted universe multiverse
-deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-updates main restricted universe multiverse
-deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-backports main restricted universe multiverse
-deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-security main restricted universe multiverse
-# add tsinghua mirrors end
-">/etc/apt/sources.list
 		sudo apt update -y
 		#sudo apt upgrade -y
 		#sudo apt full-upgrade -y

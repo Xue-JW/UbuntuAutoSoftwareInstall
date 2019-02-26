@@ -62,12 +62,44 @@ do
 		sudo dpkg -i ${lanternName}
 		;;
 		4)
-		ssqtName="Shadowsock_qt.AppImage"
-		sudo wget -O ${ssqtName} -c ${ssqtLink}
-		sudo chmod +x ${ssqtName}
-		echo "软件已下载至${package_path}/${ssqtName},双击即可打开运行，在添加时通过选择扫描屏幕二维码即可完成配置，chrome配置与Windows相同
-[enter to continue]"
-		read
+		ss_qtName="Shadowsock_qt.AppImage"
+		ss_cfgpath=~/.config/shadowsocks-qt5
+		ss_startpath=~/.config/autostart
+		ss_autostart="[Desktop Entry]\n
+				Name=Shadowsocks-Qt5\n
+				Exec=${package_path}/${ss_qtName}\n
+				Type=Application\n
+				Terminal=false\n
+				X-GNOME-Autostart-enabled=true\n"
+		#sudo apt-fast install screen
+		sudo wget -O ${ss_qtName} -c ${ssqtLink}
+		sudo chmod +x ${ss_qtName}
+		sudo -H pip install -U genpac  # 全局pac代理
+		
+
+		if [[ !(-e "${setting_path}/ss_config.ini") ]];
+		then
+			echo "软件已下载至${package_path}/${ss_qtName},双击即可打开运行,启动后右键右上角绿色纸飞机进行设置,具体配置参考之前的文档"
+		else
+			sudo mkdir ${ss_cfgpath}
+			sudo chmod 777 ${ss_cfgpath} -R
+			cp ${setting_path}/ss_config.ini ${ss_cfgpath}/config.ini
+			sudo chmod 666 ${ss_cfgpath}/config.ini
+			echo "软件已下载至${package_path}/${ss_qtName}并配置完成,双击即可打开运行"
+		fi
+		#nohup ${package_path}/${ss_qtName} &
+		nohup ${package_path}/${ss_qtName}>${package_path}/ss.out  2>&1 &
+		#screen -d -m -s ss ${package_path}/${ss_qtName}	
+		#setsid	${package_path}/${ss_qtName} &
+		#mkdir ${ss_startpath}
+		echo -e ${ss_autostart} > ${ss_startpath}/shadowsocks-qt5.desktop
+		sudo chmod 666 ${ss_startpath}/shadowsocks-qt5.desktop
+
+		genpac --pac-proxy "SOCKS5 127.0.0.1:6666" --gfwlist-proxy="SOCKS5 127.0.0.1:6666" --output="autoproxy.pac" --gfwlist-url="https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt"
+		sudo gsettings set org.gnome.system.proxy mode auto
+		sudo gsettings set org.gnome.system.proxy autoconfig-url "file://${package_path}/autoproxy.pac"
+		echo "已打开SS并设为开机自启动.[Press any key to continue],可打开浏览器测试"
+		#read
 		;;
 		5)
 		sudo add-apt-repository ppa:graphics-drivers/ppa -y
@@ -98,5 +130,5 @@ do
 		echo "请输入正确数字 [0-10]"
 		;;
 	esac
-	clear
+	#clear
 done
