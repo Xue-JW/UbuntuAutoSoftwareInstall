@@ -32,7 +32,7 @@ sudo ./Install.sh
 
 ## 软件清单
 
-- ### 必备软件
+### 必备软件
 
 1. 搜狗输入法
 2. Google输入法
@@ -40,48 +40,48 @@ sudo ./Install.sh
 4. Shadowsocks-qt5
 5. NVIDIA驱动
 
-- ### 文件浏览软件
+### 文件浏览软件
 
-  1. Chromium浏览器
-  2. 网易云音乐
-  3. VIM+自动配置
-  4. Typora
-  5. 福昕阅读器
-  6. Calibre
-  7. WPS Office 
+1. Chromium浏览器
+2. 网易云音乐
+3. VIM+自动配置
+4. Typora
+5. 福昕阅读器
+6. Calibre
+7. WPS Office 
 
-- ### 科研工具
+### 科研工具
 
-  1. QT 5.10.0
-  2. VS code
-  3. ROS kinetic
-  4. Roboware Studio
-  5. Anaconda
-  6. Pycharm
-  7. Mendeley
-  8. virtualbox虚拟机
+1. QT 5.10.0
+2. VS code
+3. ROS kinetic
+4. Roboware Studio
+5. Anaconda
+6. Pycharm
+7. Mendeley
+8. virtualbox虚拟机
 
-- ### 常用工具
+### 常用工具
 
-  1. 有道词典【翻译软件】
-  2. Git【版本管理】
-  3. Teamviewer【远程控制】
-  4. nomachine【远程控制】
-  5. flameshot【截图软件】
-  6. Seafile客户端【备份软件】
-  7. Uget+aria2c【下载器】
-  8. wewechat【微信客户端】
-  9. gdebi【deb安装器】
+1. 有道词典【翻译软件】
+2. Git【版本管理】
+3. Teamviewer【远程控制】
+4. nomachine【远程控制】
+5. flameshot【截图软件】
+6. Seafile客户端【备份软件】
+7. Uget+aria2c【下载器】
+8. wewechat【微信客户端】
+9. gdebi【deb安装器】
 
-- ### 系统美化软件
+### 系统美化软件
 
-  1. conky【边栏信息】
-  2. Docky【底栏】
-  3. Unity Tweak Tool【系统主题设置】
-  4. indicator-multiload 【状态栏显示系统信息】
-  5. cairo-dock【底栏】【推荐】
-  6. flatabulous-theme+MacUbuntu【主题】
-  7. gnome-tweak-tool【系统主题设置】
+1. conky【边栏信息】
+2. Docky【底栏】
+3. Unity Tweak Tool【系统主题设置】
+4. indicator-multiload 【状态栏显示系统信息】
+5. cairo-dock【底栏】【推荐】
+6. flatabulous-theme+MacUbuntu【主题】
+7. gnome-tweak-tool【系统主题设置】
 
 ## 安装部分软件设置
 
