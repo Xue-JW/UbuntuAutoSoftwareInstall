@@ -17,7 +17,7 @@ anacondaLink="https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/Anaconda3-5.
 robowareLink="https://github.com/TonyRobotics/RoboWare/raw/master/Studio/roboware-studio_1.2.0-1524709819_amd64.deb"
 mendeleyLink="https://www.mendeley.com/repositories/ubuntu/stable/amd64/mendeleydesktop-latest"
 virtualboxLink="https://download.virtualbox.org/virtualbox/6.0.2/virtualbox-6.0_6.0.2-128162~Ubuntu~xenial_amd64.deb"
-
+QGCLink="https://s3-us-west-2.amazonaws.com/qgroundcontrol/latest/QGroundControl.AppImage"
 while :
 do
 clear
@@ -36,6 +36,7 @@ ${Green_font_prefix} 10.${Font_color_suffix} tensorflow #
 ${Green_font_prefix} 11.${Font_color_suffix} tensorflow-cpu #
 ${Green_font_prefix} 12.${Font_color_suffix} caffe #
 ${Green_font_prefix} 13.${Font_color_suffix} pytorch 
+${Green_font_prefix} 14.${Font_color_suffix} QGroundControl
 ————————————
 ${Green_font_prefix} 0.${Font_color_suffix} 退出安装
 ————————————" && echo
@@ -105,7 +106,11 @@ ${Green_font_prefix} 0.${Font_color_suffix} 退出安装
 		# TODO：分为conda和pip两种，其中用pip安装需区分python版本，和cuda版本也有关系，但安装方便，这个之后可以用脚本写
 		;;		
 		14)
-		echo "Null"
+		QGCName="QGC.AppImage"
+		sudo wget -O ${QGCName} -c ${QGCLink}
+		sudo chmod +x ${QGCName}
+		./${QGCName}
+		# sudo dpkg -i ${vscodeName}
 		;;
 		0)
 		echo "退出安装系统软件"
@@ -116,5 +121,5 @@ ${Green_font_prefix} 0.${Font_color_suffix} 退出安装
 		;;
 	esac
 	sudo chmod 777 ${package_path} -R
-	clear
+	#clear
 done
