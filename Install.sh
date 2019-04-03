@@ -6,18 +6,21 @@
 #=================================================
 #	System Required: Ubuntu16.04 x64
 #	Description: Software install automatic
-#	Version: 0.0.1
+#	Version: 0.0.2
 #	Author: Gavin
 #	Blog: 
 #=================================================
 
-sh_ver="0.0.1"
+sh_ver="0.0.2"
 filepath=$(cd "$(dirname "$0")"; pwd)
 package_path=~/Downloads/Software_Package
+zh_package_path=~/下载/Software_Package
 setting_path=$(cd "$(dirname "$0")"; pwd)/setting_file
+user_id=$(whoami)
 
-
-export filepath package_path setting_path
+# create download dir
+[ $LANG == "zh_CN.UTF-8" ] && package_path = $(zh_package_path)
+export filepath package_path setting_path user_id
 
 if [ ! -e ${package_path} ]
 then
@@ -25,12 +28,13 @@ then
 	sudo chmod 777 ${package_path} -R
 fi
 
-#代理
+
+# add proxy in terminal
 #export http_proxy=proxy_addr:port
 #export https_proxy=proxy_addr:port
 #export ftp_proxy=proxy_addr:port
 
-# 时区
+# set time-zone
 sudo timedatectl set-local-rtc true
 sudo timedatectl set-ntp true
 
@@ -150,7 +154,7 @@ uninstall_sys_app(){
 
 ####################################
 clear
-check_root
+#check_root
 check_script_complete
 check_sys
 
@@ -162,10 +166,11 @@ echo -e "
 Ubuntu软件一键安装脚本 ${Red_font_prefix}[v${sh_ver}]${Font_color_suffix}
 -- Gavin | for Lab317&318 --
 
-本脚本暂时只支持Ubuntu16.04 64位系统，其他系统未经测试，当前系统为： ${Green_font_prefix}${release} ${bit}${Font_color_suffix}
+本脚本只在Ubuntu16.04 64位系统验证，其他系统未经测试不确保可用，当前系统为： ${Green_font_prefix}${release} ${bit}${Font_color_suffix}
 脚本文件路径：${Green_font_prefix}${filepath}${Font_color_suffix}
+安装包保存路径:${Green_font_prefix}${package_path}${Font_color_suffix}
 
-${Green_font_prefix} 10.${Font_color_suffix}更新 软件源与安装安装器【首次执行必选】【apt-fast选择：apt，16，Yes】
+${Green_font_prefix} 10.${Font_color_suffix}更新 软件源与安装安装器【首次执行必选】${Green_background_prefix}【apt-fast选择：apt，16，Yes】${Font_color_suffix}
 ————————————
 ${Green_font_prefix} 1.${Font_color_suffix} 安装 必备软件
 ${Green_font_prefix} 2.${Font_color_suffix} 安装 文件浏览软件
@@ -176,6 +181,7 @@ ${Green_font_prefix} 5.${Font_color_suffix} 安装 系统美化软件
 ${Green_font_prefix} 6.${Font_color_suffix} 升级 本脚本 #
 ${Green_font_prefix} 7.${Font_color_suffix} 设置 Shadowsock #
 ${Green_font_prefix} 8.${Font_color_suffix} 生成 ssh key #
+${Green_font_prefix} 9.${Font_color_suffix} 卸载 多余系统自带软件
 ————————————
 ${Green_font_prefix} 0.${Font_color_suffix} 退出 本脚本
 ————————————
@@ -233,7 +239,10 @@ ${Green_font_prefix} 0.${Font_color_suffix} 退出 本脚本
 			;;
 			esac
 		done
-		;;	
+		;;
+		9)
+		uninstall_sys_app
+		;;
 		0)
 		sudo chmod 777 ${package_path} -R
 		echo "退出脚本，感谢使用"

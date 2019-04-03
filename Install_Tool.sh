@@ -38,7 +38,7 @@ ${Green_font_prefix} 0.${Font_color_suffix} 退出工具安装
 	case "$num" in
 		1)
 		youdaoName="youdao.deb"
-		sudo wget -O ${youdaoName} -c ${youdaoLink}
+		wget -O ${youdaoName} -c ${youdaoLink}
 		sudo dpkg -i ${youdaoName}
 		sudo apt-get -f install -y
 		;;
@@ -47,13 +47,13 @@ ${Green_font_prefix} 0.${Font_color_suffix} 退出工具安装
 		;;
 		3)
 		teamviewerName="teamviewer.deb"
-		sudo wget -O ${teamviewerName} -c ${teamviewerLink}
+		wget -O ${teamviewerName} -c ${teamviewerLink}
 		sudo dpkg -i ${teamviewerName}
 		sudo apt-get -f install -y
 		;;
 		4)
 		nomachineName="nomachineName.deb"
-		sudo wget -O ${nomachineName} -c ${nomachineLink}
+		wget -O ${nomachineName} -c ${nomachineLink}
 		sudo dpkg -i ${nomachineName}
 		;;
 		5)
@@ -73,7 +73,7 @@ ${Green_font_prefix} 0.${Font_color_suffix} 退出工具安装
 		;;
 		8)
 		wewechatName="wewechat.deb"
-		sudo wget -O ${wewechatName} -c ${wewechatLink}
+		wget -O ${wewechatName} -c ${wewechatLink}
 		sudo dpkg -i ${wewechatName}
 		;;
 		0)

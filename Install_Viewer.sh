@@ -65,7 +65,7 @@ ${Green_font_prefix} 0.${Font_color_suffix} 退出工具安装
 		;;
 		2)
 		netMusicName="netMusic.deb"
-		sudo wget -O ${netMusicName} -c ${netMusicLink}
+		wget -O ${netMusicName} -c ${netMusicLink}
 		sudo apt-fast install vlc
 		sudo dpkg -i ${netMusicName}
 		sudo apt-fast -f -y install # install depend
@@ -84,7 +84,7 @@ ${Green_font_prefix} 0.${Font_color_suffix} 退出工具安装
 		;;
 		5) 
 		foxitName="foxit.run"
-		sudo wget -O ${foxitName}.tar.gz -c ${foxitLink}
+		wget -O ${foxitName}.tar.gz -c ${foxitLink}
 		tar xvzf ${foxitName}.tar.gz -O > ${foxitName}
 		chmod +x ${foxitName}
 		sudo ./${foxitName}
@@ -95,7 +95,7 @@ ${Green_font_prefix} 0.${Font_color_suffix} 退出工具安装
 		;;
 		7)
 		wpsName="wps.deb"
-		sudo wget -O ${wpsName} -c ${wpsLink}
+		wget -O ${wpsName} -c ${wpsLink}
 		sudo dpkg -i ${wpsName}
 		;;
 		8)

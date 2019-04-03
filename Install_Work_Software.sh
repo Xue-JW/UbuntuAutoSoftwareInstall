@@ -47,13 +47,13 @@ ${Green_font_prefix} 0.${Font_color_suffix} 退出安装
 		sudo apt-fast install build-essential libgl1-mesa-dev -y
 		sudo apt-fast install g++ -y
 		qtName="qt_5_10_0.run"
-		sudo wget -O ${qtName} -c ${qtLink}
+		wget -O ${qtName} -c ${qtLink}
 		chmod +x ./${qtName}
 		./${qtName}
 		;;
 		2)
 		vscodeName="vsCode.deb"
-		sudo wget -O ${vscodeName} -c ${vscodeLink}
+		wget -O ${vscodeName} -c ${vscodeLink}
 		sudo dpkg -i ${vscodeName}
 		;;
 		3)
@@ -65,13 +65,13 @@ ${Green_font_prefix} 0.${Font_color_suffix} 退出安装
 		sudo python -m pip install pylint -y
 		sudo apt-fast install clang-format-3.8 -y
 		robowareName="roboware.deb"
-		sudo wget -O ${robowareName} -c ${robowareLink}
+		wget -O ${robowareName} -c ${robowareLink}
 		sudo dpkg -i ${robowareName}
 
 		;;
 		5)		
 		anacondaName="Anaconda3-5.3.1-Linux-x86_64.sh"
-		sudo wget -O ${anacondaName} -c ${anacondaLink}
+		wget -O ${anacondaName} -c ${anacondaLink}
 		chmod +x ${anacondaName}
 		./${anacondaName}
 		;;
@@ -80,12 +80,12 @@ ${Green_font_prefix} 0.${Font_color_suffix} 退出安装
 		;;
 		7)
 		mendeleyName="mendeley.deb"
-		sudo wget -O ${mendeleyName} -c ${mendeleyLink}
+		wget -O ${mendeleyName} -c ${mendeleyLink}
 		sudo dpkg -i ${mendeleyName}
 		;;
 		8)
 		virtualboxName="virtualbox.deb"
-		sudo wget -O ${virtualboxName} -c ${virtualboxLink}
+		wget -O ${virtualboxName} -c ${virtualboxLink}
 		sudo dpkg -i ${virtualboxName}
 		;;
 		9)
@@ -107,7 +107,7 @@ ${Green_font_prefix} 0.${Font_color_suffix} 退出安装
 		;;		
 		14)
 		QGCName="QGC.AppImage"
-		sudo wget -O ${QGCName} -c ${QGCLink}
+		wget -O ${QGCName} -c ${QGCLink}
 		sudo chmod +x ${QGCName}
 		./${QGCName}
 		# sudo dpkg -i ${vscodeName}
