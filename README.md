@@ -80,6 +80,7 @@
 7. Uget+aria2c【下载器】
 8. wewechat【微信客户端】
 9. gdebi【deb安装器】
+10. Synergy Pro【多电脑共用一套鼠键】
 
 ### 系统美化软件
 
@@ -105,5 +106,5 @@
 
 ## 补充
 
-欢迎提交常用软件或遇到的bug,联系方式:Xue.JW@qq.com
+欢迎提交常用软件或反馈遇到的bug,联系方式:Xue.JW@qq.com
 

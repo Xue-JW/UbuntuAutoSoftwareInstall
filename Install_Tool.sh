@@ -30,6 +30,7 @@ ${Green_font_prefix} 6.${Font_color_suffix} Seafile客户端【备份软件】
 ${Green_font_prefix} 7.${Font_color_suffix} Uget+aria2c【下载器】
 ${Green_font_prefix} 8.${Font_color_suffix} wewechat【微信客户端】
 ${Green_font_prefix} 9.${Font_color_suffix} gdebi【deb安装器】
+${Green_font_prefix} 10.${Font_color_suffix}Synergy Pro【多电脑共用一套鼠键】
 ————————————
 ${Green_font_prefix} 0.${Font_color_suffix} 退出工具安装
 ————————————" && echo
@@ -84,13 +85,12 @@ ${Green_font_prefix} 0.${Font_color_suffix} 退出工具安装
 		sudo apt-fast install gdebi -y
 		;;	
 		10)
-		echo "退出安装常用工具"
-		exit
+		echo -e "\nSynergy Pro\n\n下载地址:https://www.lanzous.com/i3pou2j\n\n网盘密码为:318"
 		;;
 		*)
 		echo "请输入正确数字 [0-10]"
 		;;
 	esac
 	sudo chmod 777 ${package_path} -R
-	#clear
+	# clear
 done
