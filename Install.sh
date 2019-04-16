@@ -56,14 +56,14 @@ check_source(){
 ------aliyun(28ms)***tsinghua(35ms)***163(30ms)***ustc(26ms-edu)------"
 		sudo cp /etc/apt/sources.list /etc/apt/sources.list.old
 		FILE=${setting_path}/source_list.txt
-		k=1
-		while read -r line;do	
-			sudo echo ${line} >> /etc/apt/sources.list
-			((k++))
-		done < ${FILE} 
-	
-
+		export FILE
+		sudo -E bash -c '
+		while read -r line;do
+			echo ${line} >> /etc/apt/sources.list
+		done < ${FILE}
+		'
 		sudo apt update -y
+
 		#sudo apt upgrade -y
 		#sudo apt full-upgrade -y
 		#sudo apt install fastitude -y # 相比apt能自动解决依赖问题
