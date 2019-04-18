@@ -50,14 +50,18 @@ check_root(){
 }
 
 check_source(){
-	#LASTLINE=$(tail -1 /etc/apt/sources.list)
+	[ $release == 'ubuntu' ] && echo -e "${Info} I don't kown your ubuntu release and will add ubuntu 16.04 sourcefile into system setting"
+	[ $release == 'ubuntu_16' ] && FILE=${setting_path}/ubuntu_16_source_list.txt
+	[ $release == 'ubuntu_18' ] && FILE=${setting_path}/ubuntu_18_source_list.txt
+	export FILE
+	#echo $FILE
+
 	if [ `grep -c '# add tsinghua mirrors end' /etc/apt/sources.list` -eq '0' ];then
 		echo "添加软件源:
 ------aliyun(28ms)***tsinghua(35ms)***163(30ms)***ustc(26ms-edu)------"
 		sudo cp /etc/apt/sources.list /etc/apt/sources.list.old
-		FILE=${setting_path}/source_list.txt
-		export FILE
 		sudo -E bash -c '
+		echo "###add custom mirrors###" > /etc/apt/sources.list
 		while read -r line;do
 			echo ${line} >> /etc/apt/sources.list
 		done < ${FILE}
@@ -68,31 +72,38 @@ check_source(){
 		#sudo apt full-upgrade -y
 		#sudo apt install fastitude -y # 相比apt能自动解决依赖问题
 		echo "添加软件源完成"
+	else
+		echo "mirrors has added"
 	fi
 }
 
 check_downloader(){
 
-	if [ ! -e "/usr/sbin/apt-fast" ]
-	then
-	   	sudo add-apt-repository ppa:saiarcot895/myppa -y
-		sudo apt-get update
-		sudo apt-get -y install apt-fast
-	fi
+	#if [ ! -e "/usr/sbin/apt-fast" ]
+	#then
+	#   	sudo add-apt-repository ppa:apt-fast/stable -y
+	#	sudo apt-get update
+	#	sudo apt-get -y install apt-fast
+	#fi
 
 	if [ ! -e "/usr/share/build-essential" ]
 	then
-		sudo apt-fast install build-essential
+		sudo apt install build-essential
 	fi
 
 	if [ ! -e "/usr/bin/wget" ]
 	then
-	   sudo apt-fast install wget
+	   sudo apt install wget
 	fi
 
 	if [ ! -e "/usr/bin/curl" ]
 	then
-	   sudo apt-fast install curl
+	   sudo apt install curl
+	fi
+
+	if [ ! -e "/usr/bin/pip" ]
+	then
+	   sudo apt install python-pip python-dev
 	fi
 }
 
@@ -120,6 +131,11 @@ check_sys(){
 		release="debian"
 	elif cat /etc/issue | grep -q -E -i "ubuntu"; then
 		release="ubuntu"
+		if [ `grep -c '18' /etc/issue` -eq '1' ];then 
+			release="ubuntu_18";
+		elif [ `grep -c '16' /etc/issue` -eq '1' ];then 
+			release="ubuntu_16"
+		fi
 	elif cat /etc/issue | grep -q -E -i "centos|red hat|redhat"; then
 		release="centos"
 	elif cat /proc/version | grep -q -E -i "debian"; then
@@ -128,26 +144,27 @@ check_sys(){
 		release="ubuntu"
 	elif cat /proc/version | grep -q -E -i "centos|red hat|redhat"; then
 		release="centos"
-    fi
+	fi
 	bit=`uname -m`
+	[ $release != 'ubuntu' ] && [ $release != 'ubuntu_16' ] && [ $release != 'ubuntu_18' ] && echo -e "${Error} this Script only for unbuntu now" && exit 1
 }
 
 uninstall_sys_app(){
-	sudo apt-fast remove thunderbird -y
-	sudo apt-fast remove totem -y
-	sudo apt-fast remove rhythmbox -y
-	sudo apt-fast remove empathy   -y
-	sudo apt-fast remove brasero -y
-	sudo apt-fast remove simple-scan -y
-	sudo apt-fast remove gnome-mahjongg  -y
-	sudo apt-fast remove aisleriot  -y
-	sudo apt-fast remove gnome-mines  -y
-	sudo apt-fast remove transmission-common  -y
-	sudo apt-fast remove gnome-orca  -y
-	sudo apt-fast remove webbrowser-app  -y
-	sudo apt-fast remove gnome-sudoku -y
-	sudo apt-fast remove libreoffice-common -y
-	sudo apt-fast clean
+	sudo apt remove thunderbird -y
+	sudo apt remove totem -y
+	sudo apt remove rhythmbox -y
+	sudo apt remove empathy   -y
+	sudo apt remove brasero -y
+	sudo apt remove simple-scan -y
+	sudo apt remove gnome-mahjongg  -y
+	sudo apt remove aisleriot  -y
+	sudo apt remove gnome-mines  -y
+	sudo apt remove transmission-common  -y
+	sudo apt remove gnome-orca  -y
+	sudo apt remove webbrowser-app  -y
+	sudo apt remove gnome-sudoku -y
+	sudo apt remove libreoffice-common -y
+	sudo apt clean
 }
 
 
@@ -170,7 +187,7 @@ Ubuntu软件一键安装脚本 ${Red_font_prefix}[v${sh_ver}]${Font_color_suffix
 脚本文件路径：${Green_font_prefix}${filepath}${Font_color_suffix}
 安装包保存路径:${Green_font_prefix}${package_path}${Font_color_suffix}
 
-${Green_font_prefix} 10.${Font_color_suffix}更新 软件源与安装安装器【首次执行必选】${Green_background_prefix}【apt-fast选择：apt，16，Yes】${Font_color_suffix}
+${Green_font_prefix} 10.${Font_color_suffix}更新 软件源与安装安装器${Green_background_prefix}【首次执行必选】${Font_color_suffix}
 ————————————
 ${Green_font_prefix} 1.${Font_color_suffix} 安装 必备软件
 ${Green_font_prefix} 2.${Font_color_suffix} 安装 文件浏览软件
@@ -221,7 +238,7 @@ ${Green_font_prefix} 0.${Font_color_suffix} 退出 本脚本
 					ssh-keygen -t rsa -b 4096 -C "$OPTARG"
 					eval "$(ssh-agent -s)"
 					ssh-add ~/.ssh/id_rsa
-					sudo apt-fast install xclip
+					sudo apt install xclip
 					xclip -sel clip < ~/.ssh/id_rsa.pub
 					cat ~/.ssh/id_rsa > ~/desktop/github_ssh_key.txt
 					eval "$(ssh-agent -s)"

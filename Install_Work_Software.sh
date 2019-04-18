@@ -44,8 +44,8 @@ ${Green_font_prefix} 0.${Font_color_suffix} 退出安装
 	read -e -p " 请输入数字 [0-10]:" num
 	case "$num" in
 		1)
-		sudo apt-fast install build-essential libgl1-mesa-dev -y
-		sudo apt-fast install g++ -y
+		sudo apt install build-essential libgl1-mesa-dev -y
+		sudo apt install g++ -y
 		qtName="qt_5_10_0.run"
 		wget -O ${qtName} -c ${qtLink}
 		chmod +x ./${qtName}
@@ -61,9 +61,9 @@ ${Green_font_prefix} 0.${Font_color_suffix} 退出安装
 		${filepath}/install_ros_kinetic.sh
 		;;
 		4)
-		sudo apt-fast install python-pip -y
+		sudo apt install python-pip -y
 		sudo python -m pip install pylint -y
-		sudo apt-fast install clang-format-3.8 -y
+		sudo apt install clang-format-3.8 -y
 		robowareName="roboware.deb"
 		wget -O ${robowareName} -c ${robowareLink}
 		sudo dpkg -i ${robowareName}

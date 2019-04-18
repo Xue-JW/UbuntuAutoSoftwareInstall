@@ -50,28 +50,28 @@ ${Green_font_prefix} 0.${Font_color_suffix} 退出工具安装
 	case "$num" in
 		1)
 		sudo add-apt-repository ppa:a-v-shkop/chromium -y
-		sudo apt-fast update
-		sudo apt-fast install chromium-browser -y
+		sudo apt update
+		sudo apt install chromium-browser -y
 		sudo add-apt-repository -r ppa:a-v-shkop/chromium -y  # have great effect for apt update, but remove it may cause unable to update chromium
 		######
 		#chromeName="chrome.deb"
 		#sudo wget -O ${chromeName} -c ${ChromeLink}
 		#sudo dpkg -i ${chromeName}
 		#sudo wget http://www.linuxidc.com/files/repo/google-chrome.list -P /etc/apt/sources.list.d/
-		#wget -q -O - https://dl.google.com/linux/linux_signing_key.pub  | sudo apt-fast-key add -
-		#sudo apt-fast update
-		#sudo apt-fast install google-chrome-stable -y
+		#wget -q -O - https://dl.google.com/linux/linux_signing_key.pub  | sudo apt-key add -
+		#sudo apt update
+		#sudo apt install google-chrome-stable -y
 		######
 		;;
 		2)
 		netMusicName="netMusic.deb"
 		wget -O ${netMusicName} -c ${netMusicLink}
-		sudo apt-fast install vlc
+		sudo apt install vlc
 		sudo dpkg -i ${netMusicName}
-		sudo apt-fast -f -y install # install depend
+		sudo apt -f -y install # install depend
 		;;
 		3)
-		sudo apt-fast install -y vim
+		sudo apt install -y vim
 		vim_setting
 		;;
 		4)
@@ -79,8 +79,8 @@ ${Green_font_prefix} 0.${Font_color_suffix} 退出工具安装
 		wget -qO - https://typora.io/linux/public-key.asc | sudo apt-key add -
 		sudo add-apt-repository 'deb https://typora.io linux/' -y
 		# sudo add-apt-repository 'deb https://typora.io/linux ./'
-		sudo apt-fast update
-		sudo apt-fast install typora  -y
+		sudo apt update
+		sudo apt install typora  -y
 		;;
 		5) 
 		foxitName="foxit.run"
@@ -100,7 +100,7 @@ ${Green_font_prefix} 0.${Font_color_suffix} 退出工具安装
 		;;
 		8)
 		sudo add-apt-repository ppa:notepadqq-team/notepadqq -y
-		sudo apt-fast update && sudo apt-fast install notepadqq -y
+		sudo apt update && sudo apt install notepadqq -y
 		;;
 		0)
 		echo "退出安装浏览软件"

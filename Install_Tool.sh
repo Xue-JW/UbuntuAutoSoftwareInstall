@@ -44,7 +44,7 @@ ${Green_font_prefix} 0.${Font_color_suffix} 退出工具安装
 		sudo apt-get -f install -y
 		;;
 		2)
-		sudo apt-fast install git -y
+		sudo apt install git -y
 		;;
 		3)
 		teamviewerName="teamviewer.deb"
@@ -59,18 +59,18 @@ ${Green_font_prefix} 0.${Font_color_suffix} 退出工具安装
 		;;
 		5)
 		#sudo add-apt-repository ppa:shutter/ppa -y
-		#sudo apt-fast update 
-		#sudo apt-fast install shutter -y
-        apt install flameshot
+		#sudo apt update 
+		#sudo apt install shutter -y
+        	sudo apt install flameshot
 
 		;;
 		6)
 		sudo add-apt-repository ppa:seafile/seafile-client -y
-		sudo apt-fast update && sudo apt-fast install seafile-gui -y
+		sudo apt update && sudo apt install seafile-gui -y
 		;;
 		7)
-		sudo apt-fast install uget  -y
-		sudo apt-fast install aria2  -y
+		sudo apt install uget  -y
+		sudo apt install aria2  -y
 		;;
 		8)
 		wewechatName="wewechat.deb"
@@ -82,7 +82,7 @@ ${Green_font_prefix} 0.${Font_color_suffix} 退出工具安装
 		exit
 		;;
 		9)
-		sudo apt-fast install gdebi -y
+		sudo apt install gdebi -y
 		;;	
 		10)
 		echo -e "\nSynergy Pro\n\n下载地址:https://www.lanzous.com/i3pou2j\n\n网盘密码为:318"

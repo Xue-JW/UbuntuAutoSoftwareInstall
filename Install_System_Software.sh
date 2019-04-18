@@ -36,25 +36,25 @@ do
 		if [ ! -e "/usr/bin/fcitx" ]
 		then
 			sudo add-apt-repository ppa:fcitx-team/nightly -y
-			sudo apt-fast update
-			sudo apt-fast install fcitx fcitx-libs -y
-			sudo apt-fast install fcitx-config-gtk  -y
-			sudo apt-fast install fcitx-table-all -y
-			sudo apt-fast install im-switch -y
+			sudo apt update
+			sudo apt install fcitx fcitx-libs -y
+			sudo apt install fcitx-config-gtk  -y
+			sudo apt install fcitx-table-all -y
+			sudo apt install im-switch -y
 			sudo add-apt-repository -r ppa:fcitx-team/nightly -y  # tooo slow in China,remove afer install
 		fi
 		sougouName="sougoupinyi.deb"
 		wget -O ${sougouName} -c ${sougouLink}
 		sudo dpkg -i ${sougouName}
-		sudo apt-fast -f -y install # install depend
+		sudo apt -f -y install # install depend
 		
 		echo -e "输入法切换可参考：https://jingyan.baidu.com/article/adc815134f4b92f722bf7350.html?qq-pf-to=pcqq.c2c"
 		# sudo dpkg -i sogoupinyin_amd64.deb
-		# sudo apt-fast -f -y install
+		# sudo apt -f -y install
 		# sudo dpkg -i sogoupinyin_amd64.deb
 		;;
 		2)
-		sudo apt-fast install fcitx fcitx-googlepinyin fcitx-module-cloudpinyin -y
+		sudo apt install fcitx fcitx-googlepinyin fcitx-module-cloudpinyin -y
 		;;
 		3)
 		lanternName="lantern.deb"
@@ -71,7 +71,7 @@ do
 				Type=Application\n
 				Terminal=false\n
 				X-GNOME-Autostart-enabled=true\n"
-		#sudo apt-fast install screen
+		#sudo apt install screen
 		wget -O ${ss_qtName} -c ${ssqtLink}
 		sudo chmod +x ${ss_qtName}
 		sudo -H pip install -U genpac  # 全局pac代理
@@ -79,7 +79,7 @@ do
 
 		if [[ !(-e "${setting_path}/ss_config.ini") ]];
 		then
-			echo "软件已下载至${package_path}/${ss_qtName},双击即可打开运行,启动后右键右上角绿色纸飞机进行设置,具体配置参考之前的文档"
+			echo "软件已下载至${package_path}/${ss_qtName},双击即可打开运行,启动后右键右上角绿色纸飞机进行设置,具体配置参考之前的文档"  # git备份文件不包含服务器信息
 		else
 			mkdir ${ss_cfgpath}
 			sudo chmod 777 ${ss_cfgpath} -R
@@ -91,17 +91,26 @@ do
 		nohup ${package_path}/${ss_qtName}>${package_path}/ss.out  2>&1 &
 		#screen -d -m -s ss ${package_path}/${ss_qtName}	
 		#setsid	${package_path}/${ss_qtName} &
-		#mkdir ${ss_startpath}
+		mkdir ${ss_startpath}
 		echo -e ${ss_autostart} > ${ss_startpath}/shadowsocks-qt5.desktop
 		sudo chmod 666 ${ss_startpath}/shadowsocks-qt5.desktop
 		if [[ (-e "${setting_path}/ss_config.ini") ]];
 		then
-			genpac --pac-proxy "SOCKS5 127.0.0.1:6666" --gfwlist-proxy="SOCKS5 127.0.0.1:6666" --output="autoproxy.pac" --gfwlist-url="https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt"
-			sudo gsettings set org.gnome.system.proxy mode auto
-			sudo gsettings set org.gnome.system.proxy autoconfig-url "file://${package_path}/autoproxy.pac"
+			#url=""
+			url="https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt"
+			genpac --pac-proxy "SOCKS5 127.0.0.1:6666" --gfwlist-proxy="SOCKS5 127.0.0.1:6666" --output="autoproxy.pac" --gfwlist-url=$url
+			if [[ (-e "${package_path}/autoproxy.pac") ]];
+			then
+				echo "${package_path}/autoproxy.pac"
+				echo ""file://${package_path}/autoproxy.pac""
+				sudo gsettings set org.gnome.system.proxy mode auto
+				#sudo gsettings set org.gnome.system.proxy autoconfig-url "file://${package_path}/autoproxy.pac"
+			else
+				echo -e "${Error}pac文件因网络问题下载失败，请重试"
+			fi
 		fi
 		
-		echo "已打开SS并设为开机自启动.[Press any key to continue],可打开浏览器测试"
+		echo "已打开SS并设为开机自启动.[Press any key to continue],可打开浏览器测试,${Tip}${Green_background_prefix}Ubuntu18重启后生效${Font_color_suffix}"
 		#read
 		;;
 		5)

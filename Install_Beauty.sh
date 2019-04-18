@@ -31,38 +31,38 @@ ${Green_font_prefix} 0.${Font_color_suffix} 退出美化工具安装
 	read -e -p " 请输入数字 [0-10]:" num
 	case "$num" in
 		1)
-		sudo apt-fast install curl -y
-		sudo apt-fast install conky conky-all -y
+		sudo apt install curl -y
+		sudo apt install conky conky-all -y
 		;;
 		2)
 		sudo add-apt-repository ppa:docky-core/stable -y
-		sudo apt-fast update && sudo apt-fast install docky -y
+		sudo apt update && sudo apt install docky -y
 		;;
 		3)
-		sudo apt-fast install unity-tweak-tool -y
+		sudo apt install unity-tweak-tool -y
 		;;
 		4)
-		sudo apt-fast install -y indicator-multiload
+		sudo apt install -y indicator-multiload
 		;;
 		5)
-		sudo apt-fast install cairo-dock -y
+		sudo apt install cairo-dock -y
 		;;
 		6)
 		sudo add-apt-repository ppa:noobslab/themes -y
 		sudo add-apt-repository ppa:snwh/pulp -y
 		sudo add-apt-repository ppa:noobslab/icons -y
 		sudo add-apt-repository ppa:noobslab/macbuntu -y		
-		sudo apt-fast update
-		sudo apt-fast install unity-tweak-tool -y
-		sudo apt-fast install flatabulous-theme -y
-		sudo apt-fast install ultra-flat-icons -y
-		sudo apt-fast install paper-icon-theme -y
-		sudo apt-fast install macbuntu-os-icons-lts-v7 -y
-		sudo apt-fast install macbuntu-os-ithemes-lts-v7 -y
+		sudo apt update
+		sudo apt install unity-tweak-tool -y
+		sudo apt install flatabulous-theme -y
+		sudo apt install ultra-flat-icons -y
+		sudo apt install paper-icon-theme -y
+		sudo apt install macbuntu-os-icons-lts-v7 -y
+		sudo apt install macbuntu-os-ithemes-lts-v7 -y
 		echo "安装完成，打开Unity Tweak Tool切换"
 		;;
 		7)
-		sudo apt-fast install gnome-tweak-tool  -y
+		sudo apt install gnome-tweak-tool  -y
 		;;
 		8)
 		echo "null"
