@@ -6,12 +6,12 @@
 #=================================================
 #	System Required: Ubuntu16.04 x64
 #	Description: Software install automatic
-#	Version: 0.0.2
+#	Version: 0.0.3
 #	Author: Gavin
 #	Blog: 
 #=================================================
 
-sh_ver="0.0.2"
+sh_ver="0.0.3"
 filepath=$(cd "$(dirname "$0")"; pwd)
 package_path=~/Downloads/Software_Package
 zh_package_path=~/下载/Software_Package
@@ -19,7 +19,7 @@ setting_path=$(cd "$(dirname "$0")"; pwd)/setting_file
 user_id=$(whoami)
 
 # create download dir
-[ $LANG == "zh_CN.UTF-8" ] && package_path = $(zh_package_path)
+[ $LANG == "zh_CN.UTF-8" ] && package_path=$zh_package_path
 export filepath package_path setting_path user_id
 
 if [ ! -e ${package_path} ]
