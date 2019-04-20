@@ -55,6 +55,7 @@ ${Green_font_prefix} 0.${Font_color_suffix} 退出安装
 		vscodeName="vsCode.deb"
 		wget -O ${vscodeName} -c ${vscodeLink}
 		sudo dpkg -i ${vscodeName}
+		sudo apt-get -f install -y
 		;;
 		3)
 		chmod +x ${filepath}/install_ros_kinetic.sh
@@ -67,7 +68,7 @@ ${Green_font_prefix} 0.${Font_color_suffix} 退出安装
 		robowareName="roboware.deb"
 		wget -O ${robowareName} -c ${robowareLink}
 		sudo dpkg -i ${robowareName}
-
+		sudo apt-get -f install -y
 		;;
 		5)		
 		anacondaName="Anaconda3-5.3.1-Linux-x86_64.sh"
@@ -82,11 +83,13 @@ ${Green_font_prefix} 0.${Font_color_suffix} 退出安装
 		mendeleyName="mendeley.deb"
 		wget -O ${mendeleyName} -c ${mendeleyLink}
 		sudo dpkg -i ${mendeleyName}
+		sudo apt-get -f install -y
 		;;
 		8)
 		virtualboxName="virtualbox.deb"
 		wget -O ${virtualboxName} -c ${virtualboxLink}
 		sudo dpkg -i ${virtualboxName}
+		sudo apt-get -f install -y
 		;;
 		9)
 		echo "Null"

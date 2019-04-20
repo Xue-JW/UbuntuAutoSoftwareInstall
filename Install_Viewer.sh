@@ -97,6 +97,7 @@ ${Green_font_prefix} 0.${Font_color_suffix} 退出工具安装
 		wpsName="wps.deb"
 		wget -O ${wpsName} -c ${wpsLink}
 		sudo dpkg -i ${wpsName}
+		sudo apt-get -f install -y
 		;;
 		8)
 		sudo add-apt-repository ppa:notepadqq-team/notepadqq -y

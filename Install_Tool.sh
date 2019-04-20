@@ -56,6 +56,7 @@ ${Green_font_prefix} 0.${Font_color_suffix} 退出工具安装
 		nomachineName="nomachineName.deb"
 		wget -O ${nomachineName} -c ${nomachineLink}
 		sudo dpkg -i ${nomachineName}
+		sudo apt-get -f install -y
 		;;
 		5)
 		#sudo add-apt-repository ppa:shutter/ppa -y
@@ -76,6 +77,7 @@ ${Green_font_prefix} 0.${Font_color_suffix} 退出工具安装
 		wewechatName="wewechat.deb"
 		wget -O ${wewechatName} -c ${wewechatLink}
 		sudo dpkg -i ${wewechatName}
+		sudo apt-get -f install -y
 		;;
 		0)
 		echo "退出安装常用工具"

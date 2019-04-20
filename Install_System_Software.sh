@@ -60,6 +60,7 @@ do
 		lanternName="lantern.deb"
 		wget -O ${lanternName} -c ${lanternLink}
 		sudo dpkg -i ${lanternName}
+		sudo apt-get -f install -y
 		;;
 		4)
 		ss_qtName="Shadowsock_qt.AppImage"
