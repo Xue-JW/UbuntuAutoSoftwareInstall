@@ -8,7 +8,7 @@
 #	Blog: 
 #=================================================
 
-cd ${package_path}
+cd "${package_path}"
 clear
 echo -e "开始软件安装，请选择需要安装的软件"
 
@@ -23,7 +23,7 @@ vim_setting(){
 
 if [ `grep -c 'add vim setting end' /etc/vim/vimrc` -eq '0' ];then
 	echo "添加vim个性化设置到/etc/vim/vimrc"
-	FILE=${setting_path}/vim_setting.txt
+	FILE="${setting_path}"/vim_setting.txt
 	k=1
 	while read -r line;do	
 		sudo echo ${line} >> /etc/vim/vimrc
@@ -35,13 +35,15 @@ while :
 do
 	echo -e " 
 ————————————
-${Green_font_prefix} 1.${Font_color_suffix} Chromium浏览器
-${Green_font_prefix} 2.${Font_color_suffix} 网易云音乐
-${Green_font_prefix} 3.${Font_color_suffix} VIM+自动配置
-${Green_font_prefix} 4.${Font_color_suffix} Typora
-${Green_font_prefix} 5.${Font_color_suffix} 福昕阅读器
-${Green_font_prefix} 6.${Font_color_suffix} Calibre
-${Green_font_prefix} 7.${Font_color_suffix} WPS Office 
+${Green_font_prefix} 1.${Font_color_suffix} Chromium浏览器 【浏览器】
+${Green_font_prefix} 2.${Font_color_suffix} 网易云音乐 【音频播放器】
+${Green_font_prefix} 3.${Font_color_suffix} VIM+自动配置 【终端编辑器】
+${Green_font_prefix} 4.${Font_color_suffix} Typora【MarkDown编辑器】
+${Green_font_prefix} 5.${Font_color_suffix} 福昕阅读器 【PDF阅读器】
+${Green_font_prefix} 6.${Font_color_suffix} Calibre 【论文管理软件】
+${Green_font_prefix} 7.${Font_color_suffix} WPS Office 【文档编辑软件】
+${Green_font_prefix} 8.${Font_color_suffix} Notepad++ 【文件编辑工具】
+${Green_font_prefix} 9.${Font_color_suffix} pinta【图片编辑器】
 ————————————
 ${Green_font_prefix} 0.${Font_color_suffix} 退出工具安装
 ————————————" && echo
@@ -108,13 +110,12 @@ ${Green_font_prefix} 0.${Font_color_suffix} 退出工具安装
 		exit
 		;;
 		9)
-		echo "退出安装浏览软件"
-		exit
+		sudo apt install pinta
 		;;
 		*)
 		echo "请输入正确数字 [0-10]"
 		;;
 	esac
-	sudo chmod 777 ${package_path} -R
+	#sudo chmod 777 ${package_path} -R
 	clear
 done

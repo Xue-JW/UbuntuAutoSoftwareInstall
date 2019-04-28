@@ -8,7 +8,7 @@
 #	Blog: 
 #=================================================
 
-cd ${package_path}
+cd "${package_path}"
 clear
 echo -e "开始软件安装，请选择需要安装的软件"
 
@@ -30,7 +30,8 @@ ${Green_font_prefix} 6.${Font_color_suffix} Seafile客户端【备份软件】
 ${Green_font_prefix} 7.${Font_color_suffix} Uget+aria2c【下载器】
 ${Green_font_prefix} 8.${Font_color_suffix} wewechat【微信客户端】
 ${Green_font_prefix} 9.${Font_color_suffix} gdebi【deb安装器】
-${Green_font_prefix} 10.${Font_color_suffix}Synergy Pro【多电脑共用一套鼠键】
+${Green_font_prefix} 10.${Font_color_suffix} Synergy Pro【多电脑共用一套鼠键】
+${Green_font_prefix} 11.${Font_color_suffix}【利用translate-shell做的轻量翻译小工具】 new~！
 ————————————
 ${Green_font_prefix} 0.${Font_color_suffix} 退出工具安装
 ————————————" && echo
@@ -63,7 +64,8 @@ ${Green_font_prefix} 0.${Font_color_suffix} 退出工具安装
 		#sudo apt update 
 		#sudo apt install shutter -y
         	sudo apt install flameshot
-
+		sudo python3 ./add_shortcut.py "flameshot" "flameshot-gui" "<Control>Print"
+		echo "脚本已设置使用<Ctrl+Print>键启动截图，如无效需重启生效"
 		;;
 		6)
 		sudo add-apt-repository ppa:seafile/seafile-client -y
@@ -89,10 +91,19 @@ ${Green_font_prefix} 0.${Font_color_suffix} 退出工具安装
 		10)
 		echo -e "\nSynergy Pro\n\n下载地址:https://www.lanzous.com/i3pou2j\n\n网盘密码为:318"
 		;;
+		11)
+		sudo apt install xsel xclip -y
+		sudo apt install libnotify-bin -y
+		sudo apt install translate-shell -y
+		cp ${filepath}/setting_file/copytrans.sh ${package_path}/copytrans.sh
+		sudo chmod +x ${package_path}/copytrans.sh
+		sudo python3 ./add_shortcut.py "copytran" "bash ${package_path}/copytrans.sh" "<Control>1"
+		echo "脚本已设置使用<Ctrl+1>键翻译剪切板内容，如无效需重启生效"
+		;;
 		*)
 		echo "请输入正确数字 [0-10]"
 		;;
 	esac
-	sudo chmod 777 ${package_path} -R
+	#sudo chmod 777 ${package_path} -R
 	# clear
 done

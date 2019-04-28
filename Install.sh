@@ -51,8 +51,8 @@ check_root(){
 
 check_source(){
 	[ $release == 'ubuntu' ] && echo -e "${Info} I don't kown your ubuntu release and will add ubuntu 16.04 sourcefile into system setting"
-	[ $release == 'ubuntu_16' ] && FILE=${setting_path}/ubuntu_16_source_list.txt
-	[ $release == 'ubuntu_18' ] && FILE=${setting_path}/ubuntu_18_source_list.txt
+	[ $release == 'ubuntu_16' ] && FILE="${setting_path}"/ubuntu_16_source_list.txt
+	[ $release == 'ubuntu_18' ] && FILE="${setting_path}"/ubuntu_18_source_list.txt
 	export FILE
 	#echo $FILE
 
@@ -88,38 +88,43 @@ check_downloader(){
 
 	if [ ! -e "/usr/share/build-essential" ]
 	then
-		sudo apt install build-essential
+		sudo apt install build-essential -y
 	fi
 
 	if [ ! -e "/usr/bin/wget" ]
 	then
-	   sudo apt install wget
+		sudo apt install wget -y
 	fi
 
 	if [ ! -e "/usr/bin/curl" ]
 	then
-	   sudo apt install curl
+		sudo apt install curl -y
 	fi
 
 	if [ ! -e "/usr/bin/pip" ]
 	then
-	   sudo apt install python-pip python-dev
+		sudo apt install python-pip python-dev -y
+	fi
+
+	if [ ! -e "/usr/bin/notify-send" ]  # show notify in system
+	then
+		sudo apt install libnotify-bin -y
 	fi
 }
 
 # 是否所有安装脚本都在
 check_script_complete(){
 	if [[ !(-e "${filepath}/Install_System_Software.sh" &&
-	-e "${filepath}/Install_Viewer.sh" &&
-	-e "${filepath}/Install_Work_Software.sh" &&
-	-e "${filepath}/Install_Tool.sh" &&
-	-e "${filepath}/Install_Beauty.sh" &&
-	-e "${filepath}/install_ros_kinetic.sh") ]];
+	-e ""${filepath}"/Install_Viewer.sh" &&
+	-e ""${filepath}"/Install_Work_Software.sh" &&
+	-e ""${filepath}"/Install_Tool.sh" &&
+	-e ""${filepath}"/Install_Beauty.sh" &&
+	-e ""${filepath}"/install_ros_kinetic.sh") ]];
 	then
 		echo -e "${Red_font_prefix}***脚本文件不完整,请确认是否遗漏***${Font_color_suffix}
 		同目录下包含Install_System_Software，Install_Viewer，Install_Work_Software，Install_Tool，Install_Beauty共5个脚本"
 	else
-		sudo chmod +x ${filepath}/Install_System_Software.sh ${filepath}/Install_Viewer.sh ${filepath}/Install_Work_Software.sh ${filepath}/Install_Tool.sh ${filepath}/Install_Beauty.sh
+		sudo chmod +x "${filepath}"/Install_System_Software.sh "${filepath}"/Install_Viewer.sh "${filepath}"/Install_Work_Software.sh "${filepath}"/Install_Tool.sh "${filepath}"/Install_Beauty.sh
 	fi
 }
 
@@ -196,8 +201,8 @@ ${Green_font_prefix} 4.${Font_color_suffix} 安装 常用工具
 ${Green_font_prefix} 5.${Font_color_suffix} 安装 系统美化软件
 ————————————
 ${Green_font_prefix} 6.${Font_color_suffix} 升级 本脚本 #
-${Green_font_prefix} 7.${Font_color_suffix} 设置 Shadowsock #
-${Green_font_prefix} 8.${Font_color_suffix} 生成 ssh key #
+${Green_font_prefix} 7.${Font_color_suffix} 设置 激活软件的键盘快捷键
+${Green_font_prefix} 8.${Font_color_suffix} 生成 ssh key
 ${Green_font_prefix} 9.${Font_color_suffix} 卸载 多余系统自带软件
 ————————————
 ${Green_font_prefix} 0.${Font_color_suffix} 退出 本脚本
@@ -207,25 +212,54 @@ ${Green_font_prefix} 0.${Font_color_suffix} 退出 本脚本
 	read -e -p " 请输入数字 [0-10]:" num
 	case "$num" in
 		1)
-		${filepath}/Install_System_Software.sh
+		"${filepath}"/Install_System_Software.sh
 		;;
 		2)
-		${filepath}/Install_Viewer.sh
+		"${filepath}"/Install_Viewer.sh
 		;;
 		3)
-		${filepath}/Install_Work_Software.sh
+		"${filepath}"/Install_Work_Software.sh
 		;;
 		4)
-		${filepath}/Install_Tool.sh
+		"${filepath}"/Install_Tool.sh
 		;;
 		5)
-		${filepath}/Install_Beauty.sh
+		"${filepath}"/Install_Beauty.sh
 		;;
 		6)
-		${filepath}/Update_Shell.sh
+		"${filepath}"/Update_Shell.sh
 		;;
 		7)
-		echo "Null"
+		echo '设置软件快捷键：
+e.g. :设置使用键盘快捷键[Alt+7]打开文件编辑器输入：
+"open gedit" "gedit" "<Alt>7"
+分别代表自定义的软件名字，启动的指令，对应的快捷键。需要使用双引号和空格区分
+如需退出输入n回车。部分系统需重启生效
+更多常用按键参考：
+Super key:                 <Super>
+Control key:               <Primary> or <Control>
+Alt key:                   <Alt>
+Shift key:                 <Shift>
+F1:                         F1
+End:                        KP_End  
+Spacebar:                  space
+Slash key:                 slash
+Asterisk key:              asterisk (so it would need "<Shift>" as well)
+Ampersand key:             ampersand (so it would need <Shift> as well)
+Numpad divide key ("/"):   KP_Divide
+Numpad multiply (Asterisk):KP_Multiply
+Numpad number key(s):      KP_1
+Numpad "-":                KP_Subtract'
+		read -e -p "请输入设定软件名称或n退出:" shortcut_setting1  
+		echo ${#shortcut_setting1}
+		if [[ "$shortcut_setting1" == 'n' || "${#shortcut_setting1}" == "0" ]]
+		then
+			echo "退出"
+		else
+			read -e -p "请输入启动指令:（注意，目前没有指令检查机制需自行确认输入输入指令的正确性）" shortcut_setting2
+			read -e -p "请输入键盘快捷键:（注意，目前没有指令检查机制需自行确认输入输入指令的正确性）" shortcut_setting3
+			sudo python3 ./add_shortcut.py "$shortcut_setting1" "$shortcut_setting2" "$shortcut_setting3"
+		fi
 		;;
 		8)
 		# generate github ssh public key
@@ -261,7 +295,7 @@ ${Green_font_prefix} 0.${Font_color_suffix} 退出 本脚本
 		uninstall_sys_app
 		;;
 		0)
-		sudo chmod 777 ${package_path} -R
+		#sudo chmod 777 ${package_path} -R
 		echo "退出脚本，感谢使用"
 		exit
 		;;
@@ -273,8 +307,8 @@ ${Green_font_prefix} 0.${Font_color_suffix} 退出 本脚本
 		echo "请输入正确数字 [0-10]"
 		;;
 	esac
-	sudo chmod 777 ${package_path} -R
+	#sudo chmod 777 ${package_path} -R
     	clear
-	cd ${filepath}
+	cd "${filepath}"
 done
 

@@ -8,7 +8,7 @@
 #	Blog: 
 #=================================================
 
-cd ${package_path}
+cd "${package_path}"
 clear
 echo -e "开始软件安装，请选择需要安装的软件"
 
@@ -78,13 +78,13 @@ do
 		sudo -H pip install -U genpac  # 全局pac代理
 		
 
-		if [[ !(-e "${setting_path}/ss_config.ini") ]];
+		if [[ !(-e ""${setting_path}"/ss_config.ini") ]];
 		then
 			echo "软件已下载至${package_path}/${ss_qtName},双击即可打开运行,启动后右键右上角绿色纸飞机进行设置,具体配置参考之前的文档"  # git备份文件不包含服务器信息
 		else
 			mkdir ${ss_cfgpath}
 			sudo chmod 777 ${ss_cfgpath} -R
-			cp ${setting_path}/ss_config.ini ${ss_cfgpath}/config.ini
+			cp "${setting_path}"/ss_config.ini ${ss_cfgpath}/config.ini
 			sudo chmod 666 ${ss_cfgpath}/config.ini
 			echo "软件已下载至${package_path}/${ss_qtName}并配置完成,双击即可打开运行"
 		fi
@@ -95,7 +95,7 @@ do
 		mkdir ${ss_startpath}
 		echo -e ${ss_autostart} > ${ss_startpath}/shadowsocks-qt5.desktop
 		sudo chmod 666 ${ss_startpath}/shadowsocks-qt5.desktop
-		if [[ (-e "${setting_path}/ss_config.ini") ]];
+		if [[ (-e ""${setting_path}"/ss_config.ini") ]];
 		then
 			#url=""
 			url="https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt"

@@ -8,7 +8,7 @@
 #	Blog: 
 #=================================================
 
-cd ${package_path}
+cd "${package_path}"
 echo -e "开始软件安装，请选择需要安装的软件"
 
 qtLink="https://mirrors.tuna.tsinghua.edu.cn/qt/official_releases/qt/5.10/5.10.0/qt-opensource-linux-x64-5.10.0.run"
