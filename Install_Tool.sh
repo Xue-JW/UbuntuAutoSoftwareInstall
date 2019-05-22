@@ -95,7 +95,7 @@ ${Green_font_prefix} 0.${Font_color_suffix} 退出工具安装
 		sudo apt install xsel xclip -y
 		sudo apt install libnotify-bin -y
 		sudo apt install translate-shell -y
-		cp ${filepath}/setting_file/copytrans.sh ${package_path}/copytrans.sh
+		cp "${filepath}"/setting_file/copytrans.sh ${package_path}/copytrans.sh
 		sudo chmod +x ${package_path}/copytrans.sh
 		sudo python3 ./add_shortcut.py "copytran" "bash ${package_path}/copytrans.sh" "<Control>1"
 		echo "脚本已设置使用<Ctrl+1>键翻译剪切板内容，如无效需重启生效"

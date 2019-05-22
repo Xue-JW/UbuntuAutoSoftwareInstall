@@ -25,7 +25,7 @@ clear
 ————————————
 ${Green_font_prefix} 1.${Font_color_suffix} QT 5.10.0
 ${Green_font_prefix} 2.${Font_color_suffix} VS code
-${Green_font_prefix} 3.${Font_color_suffix} ROS kinetic
+${Green_font_prefix} 3.${Font_color_suffix} ROS kinetic [Ubuntu16]
 ${Green_font_prefix} 4.${Font_color_suffix} Roboware Studio
 ${Green_font_prefix} 5.${Font_color_suffix} Anaconda
 ${Green_font_prefix} 6.${Font_color_suffix} Pycharm
@@ -37,6 +37,7 @@ ${Green_font_prefix} 11.${Font_color_suffix} tensorflow-cpu #
 ${Green_font_prefix} 12.${Font_color_suffix} caffe #
 ${Green_font_prefix} 13.${Font_color_suffix} pytorch 
 ${Green_font_prefix} 14.${Font_color_suffix} QGroundControl
+${Green_font_prefix} 15.${Font_color_suffix} ROS melodic [Ubuntu18]
 ————————————
 ${Green_font_prefix} 0.${Font_color_suffix} 退出安装
 ————————————" && echo
@@ -58,8 +59,8 @@ ${Green_font_prefix} 0.${Font_color_suffix} 退出安装
 		sudo apt-get -f install -y
 		;;
 		3)
-		chmod +x ${filepath}/install_ros_kinetic.sh
-		${filepath}/install_ros_kinetic.sh
+		chmod +x "${filepath}"/install_ros_kinetic.sh
+		"${filepath}"/install_ros_kinetic.sh
 		;;
 		4)
 		sudo apt install python-pip -y
@@ -115,6 +116,10 @@ ${Green_font_prefix} 0.${Font_color_suffix} 退出安装
 		./${QGCName}
 		# sudo dpkg -i ${vscodeName}
 		;;
+		15)
+		chmod +x "${filepath}"/install_ros_melodic.sh
+		"${filepath}"/install_ros_melodic.sh
+		;;
 		0)
 		echo "退出安装系统软件"
 		exit
@@ -123,6 +128,6 @@ ${Green_font_prefix} 0.${Font_color_suffix} 退出安装
 		echo "请输入正确数字 [0-10]"
 		;;
 	esac
-	sudo chmod 777 ${package_path} -R
+	#sudo chmod 777 ${package_path} -R
 	#clear
 done

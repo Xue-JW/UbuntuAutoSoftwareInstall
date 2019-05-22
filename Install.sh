@@ -56,10 +56,17 @@ check_source(){
 	export FILE
 	#echo $FILE
 
-	if [ `grep -c '# add tsinghua mirrors end' /etc/apt/sources.list` -eq '0' ];then
+	if [[ ! -e "/etc/apt/sources.list" ]];
+	then
+		sudo touch /etc/apt/sources.list
+	fi
+
+	if [ `grep -c '# add tsinghua mirrors end' /etc/apt/sources.list` -eq '0' ];
+	then
 		echo "添加软件源:
 ------aliyun(28ms)***tsinghua(35ms)***163(30ms)***ustc(26ms-edu)------"
-		sudo cp /etc/apt/sources.list /etc/apt/sources.list.old
+		change_time=`date +%y_%m_%d`
+		sudo cp /etc/apt/sources.list /etc/apt/sources.list."$change_time"
 		sudo -E bash -c '
 		echo "###add custom mirrors###" > /etc/apt/sources.list
 		while read -r line;do
@@ -114,7 +121,7 @@ check_downloader(){
 
 # 是否所有安装脚本都在
 check_script_complete(){
-	if [[ !(-e "${filepath}/Install_System_Software.sh" &&
+	if [[ !(-e ""${filepath}"/Install_System_Software.sh" &&
 	-e ""${filepath}"/Install_Viewer.sh" &&
 	-e ""${filepath}"/Install_Work_Software.sh" &&
 	-e ""${filepath}"/Install_Tool.sh" &&
@@ -189,8 +196,8 @@ Ubuntu软件一键安装脚本 ${Red_font_prefix}[v${sh_ver}]${Font_color_suffix
 -- Gavin | for Lab317&318 --
 
 本脚本只在Ubuntu16.04 64位系统验证，其他系统未经测试不确保可用，当前系统为： ${Green_font_prefix}${release} ${bit}${Font_color_suffix}
-脚本文件路径：${Green_font_prefix}${filepath}${Font_color_suffix}
-安装包保存路径:${Green_font_prefix}${package_path}${Font_color_suffix}
+脚本文件路径：${Green_font_prefix}"${filepath}"${Font_color_suffix}
+安装包保存路径:${Green_font_prefix}"${package_path}"${Font_color_suffix}
 
 ${Green_font_prefix} 10.${Font_color_suffix}更新 软件源与安装安装器${Green_background_prefix}【首次执行必选】${Font_color_suffix}
 ————————————
