@@ -195,7 +195,7 @@ echo -e "
 Ubuntu软件一键安装脚本 ${Red_font_prefix}[v${sh_ver}]${Font_color_suffix}
 -- Gavin | for Lab317&318 --
 
-本脚本只在Ubuntu16.04 64位系统验证，其他系统未经测试不确保可用，当前系统为： ${Green_font_prefix}${release} ${bit}${Font_color_suffix}
+本脚本只在Ubuntu16.04,18.04 64位系统验证，其他系统未经测试不确保可用，当前系统为： ${Green_font_prefix}${release} ${bit}${Font_color_suffix}
 脚本文件路径：${Green_font_prefix}"${filepath}"${Font_color_suffix}
 安装包保存路径:${Green_font_prefix}"${package_path}"${Font_color_suffix}
 

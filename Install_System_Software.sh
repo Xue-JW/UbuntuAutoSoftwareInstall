@@ -100,12 +100,12 @@ do
 			#url=""
 			url="https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt"
 			genpac --pac-proxy "SOCKS5 127.0.0.1:6666" --gfwlist-proxy="SOCKS5 127.0.0.1:6666" --output="autoproxy.pac" --gfwlist-url=$url
-			if [[ (-e "${package_path}/autoproxy.pac") ]];
+			if [[ (-e ""${package_path}"/autoproxy.pac") ]];
 			then
-				echo "${package_path}/autoproxy.pac"
-				echo ""file://${package_path}/autoproxy.pac""
+				echo ""${package_path}"/autoproxy.pac"
+				echo ""file://"${package_path}"/autoproxy.pac""
 				sudo gsettings set org.gnome.system.proxy mode auto
-				#sudo gsettings set org.gnome.system.proxy autoconfig-url "file://${package_path}/autoproxy.pac"
+				sudo gsettings set org.gnome.system.proxy autoconfig-url "file://"${package_path}"/autoproxy.pac"
 			else
 				echo -e "${Error}pac文件因网络问题下载失败，请重试"
 			fi
