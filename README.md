@@ -4,15 +4,16 @@
 
 ## 简介
 
-本脚本可实现使用shell在Ubuntu16及18系统一键快速安装常用软件.
+本脚本可实现使用shell在Ubuntu16及18系统一键快速安装常用软件.  ~~（包括讨厌的拼音输入法和nVidia驱动）~~
 
-![Interface](./Interface.png)
+![Interface](./image/Interface.png)
 
 
 
 ## TODO:
 
--
+- Translate to English
+- 将实验室内部使用版本进一步整理
 
 
 
@@ -48,7 +49,7 @@ sudo rm /etc/apt/sources.list
 
 软件源测速结果如图:
 
-![source_speedtest](./source_speedtest.png)
+![source_speedtest](./image/source_speedtest.png)
 
 可根据实际情况修改setting_file文件夹中source_list.txt选择需要添加的软件源
 
@@ -121,17 +122,23 @@ sudo rm /etc/apt/sources.list
 
 **ROS kinetic**:本选项调用install_ros_kinetic.sh脚本,安装并在HOME目录创建了一个catkin_ws.注意kinetic对应Ubuntu16版本系统
 
-**Synergy Pro:**需在服务器端添加客户端计算机名字，具体看压缩包说明
+**Synergy Pro:** 需在服务器端添加客户端计算机名字，具体看压缩包说明
 
-**flameshot:**可设置启用将截图贴在桌面功能，可修改系统快捷键实现点击快捷键后截图，具体设置参考网络教程。
+**flameshot:** 可设置启用将截图贴在桌面功能，可修改系统快捷键实现点击快捷键后截图，具体设置参考网络教程。
 
-**Roboware Studio :**选择安装后按方向键→选中OK，接受协议后安装
+**Roboware Studio :** 选择安装后按方向键→选中OK，接受协议后安装
 
-**copytrans：**读取剪切板内容并发送到translate-shell实现翻译并在通知栏显示翻译结果。安装重启后生效，复制英文，按【Ctrl+1】显示翻译，效果如图：
+**copytrans：** 读取剪切板内容并发送到translate-shell实现翻译并在通知栏显示翻译结果。安装重启后生效，复制英文，按【Ctrl+1】显示翻译，效果如图：
 
-![Copytrans](/home/gavin/Downloads/auto_install/Copytrans.png)
+![Copytrans](./image/Copytrans.png)
+
+## 参考链接
+
+TODO
 
 ## 补充
 
 欢迎提交常用软件或反馈遇到的bug,联系方式:Xue.JW@qq.com
+
+
 
